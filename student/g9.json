@@ -1,0 +1,41 @@
+{
+  "grade": "9",
+  "section": "Peace",
+  "students": [
+    {
+      "name": "Aquino, Jessa Mae",
+      "gender": "female",
+      "lrn": "123456789022",
+      "contact": "09271234577",
+      "email": ""
+    },
+    {
+      "name": "Castillo, Miguel Angelo",
+      "gender": "male",
+      "lrn": "123456789023",
+      "contact": "09281234578",
+      "email": ""
+    },
+    {
+      "name": "Fernandez, Patricia Ann",
+      "gender": "female",
+      "lrn": "123456789024",
+      "contact": "09291234579",
+      "email": ""
+    },
+    {
+      "name": "Gonzales, Rafael James",
+      "gender": "male",
+      "lrn": "123456789025",
+      "contact": "09301234580",
+      "email": ""
+    },
+    {
+      "name": "Manalo, April Joy",
+      "gender": "female",
+      "lrn": "123456789026",
+      "contact": "09311234581",
+      "email": ""
+    }
+  ]
+}

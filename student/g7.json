@@ -1,0 +1,41 @@
+{
+  "grade": "7",
+  "section": "Love",
+  "students": [
+    {
+      "name": "Andrade, Maria Santos",
+      "gender": "female",
+      "lrn": "123456789012",
+      "contact": "09171234567",
+      "email": ""
+    },
+    {
+      "name": "Bautista, Juan Carlos",
+      "gender": "male",
+      "lrn": "123456789013",
+      "contact": "09181234568",
+      "email": ""
+    },
+    {
+      "name": "Cruz, Ana Marie",
+      "gender": "female",
+      "lrn": "123456789014",
+      "contact": "09191234569",
+      "email": ""
+    },
+    {
+      "name": "Dela Cruz, Pedro Jose",
+      "gender": "male",
+      "lrn": "123456789015",
+      "contact": "09201234570",
+      "email": ""
+    },
+    {
+      "name": "Garcia, Sofia Elena",
+      "gender": "female",
+      "lrn": "123456789016",
+      "contact": "09211234571",
+      "email": ""
+    }
+  ]
+}

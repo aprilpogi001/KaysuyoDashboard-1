@@ -1,0 +1,41 @@
+{
+  "grade": "8",
+  "section": "Joy",
+  "students": [
+    {
+      "name": "Hernandez, Carlos Miguel",
+      "gender": "male",
+      "lrn": "123456789017",
+      "contact": "09221234572",
+      "email": ""
+    },
+    {
+      "name": "Lopez, Maria Christina",
+      "gender": "female",
+      "lrn": "123456789018",
+      "contact": "09231234573",
+      "email": ""
+    },
+    {
+      "name": "Martinez, Jose Antonio",
+      "gender": "male",
+      "lrn": "123456789019",
+      "contact": "09241234574",
+      "email": ""
+    },
+    {
+      "name": "Reyes, Angela Joy",
+      "gender": "female",
+      "lrn": "123456789020",
+      "contact": "09251234575",
+      "email": ""
+    },
+    {
+      "name": "Santos, Mark Anthony",
+      "gender": "male",
+      "lrn": "123456789021",
+      "contact": "09261234576",
+      "email": ""
+    }
+  ]
+}

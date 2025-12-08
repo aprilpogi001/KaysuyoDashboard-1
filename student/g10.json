@@ -1,0 +1,27 @@
+{
+  "grade": "10",
+  "section": "Hope",
+  "students": [
+    {
+      "name": "Aure, Ryan James",
+      "gender": "male",
+      "lrn": "123456789027",
+      "contact": "09321234582",
+      "email": ""
+    },
+    {
+      "name": "Manalo, April Macasinag",
+      "gender": "male",
+      "lrn": "107851140013",
+      "contact": "09608176074",
+      "email": "manaloapril88@gmail.com"
+    },
+    {
+      "name": "Bautista, Yesha Nicole",
+      "gender": "female",
+      "lrn": "123456789031",
+      "contact": "09361234586",
+      "email": ""
+    }
+  ]
+}
