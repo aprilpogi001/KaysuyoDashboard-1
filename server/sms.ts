@@ -1,14 +1,8 @@
 import twilio from 'twilio';
 
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-
-if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN) {
-    console.error('Twilio credentials are not set in environment variables');
-    return null;
-}
-
-const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || 'AC88b862ec7b0ed7f4445131b068d2d8d8';
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || 'YOUR_AUTH_TOKEN_HERE';
+const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER || 'YOUR_PHONE_NUMBER_HERE';
 
 function getTwilioClient() {
   if (TWILIO_ACCOUNT_SID === 'YOUR_ACCOUNT_SID_HERE' || 
