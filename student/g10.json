@@ -5,22 +5,71 @@
     {
       "name": "Aure, Ryan James",
       "gender": "male",
-      "lrn": "123456789027",
-      "contact": "09321234582",
+      "lrn": "Na",
+      "contact": "NA",
+      "email": ""
+    },
+    {
+      "name": "Julian, Arvie",
+      "gender": "male",
+      "lrn": "108035150040",
+      "contact": "09106445271",
+      "email": ""
+    },
+    {
+      "name": "Pillerva, James G.",
+      "gender": "male",
+      "lrn": "107851150016",
+      "contact": "09526415570",
+      "email": ""
+    },
+    {
+      "name": "Julian, Christian Jay G.",
+      "gender": "male",
+      "lrn": "1080351400",
+      "contact": "09817551311",
       "email": ""
     },
     {
       "name": "Manalo, April Macasinag",
-      "gender": "male",
+      "gender": "female",
       "lrn": "107851140013",
       "contact": "09608176074",
       "email": "manaloapril88@gmail.com"
     },
     {
-      "name": "Bautista, Yesha Nicole",
+      "name": "Bautista, Yesha Nicole G.",
       "gender": "female",
-      "lrn": "123456789031",
-      "contact": "09361234586",
+      "lrn": "107851150017",
+      "contact": "09652608367",
+      "email": ""
+    },
+    {
+      "name": "Caballes, Angiella Sofia",
+      "gender": "female",
+      "lrn": "107851150018",
+      "contact": "09534376462",
+      "email": ""
+    },
+    {
+      "name": "Escorido, Jomalyn G.",
+      "gender": "female",
+      "lrn": "107851150020",
+      "contact": "09941397751",
+      "email": ""
+    },
+    {
+      "name": "Salazar, Kyla N.",
+      "gender": "female",
+      "lrn": "108035160044",
+      "contact": "09650552352",
+      "email": ""
+    },
+    {
+      "name": "Salazar, Zyren C.",
+      "gender": "female",
+      "lrn": "107851150043",
+      "contact": "09513559181",
       "email": ""
     }
   ]
