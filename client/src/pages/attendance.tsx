@@ -507,7 +507,7 @@ export default function Attendance() {
                           mode="single"
                           selected={endDate}
                           onSelect={setEndDate}
-                          disabled={(date) => date > new Date() || (startDate && date < startDate)}
+                          disabled={(date: Date) => date > new Date() || (startDate ? date < startDate : false)}
                         />
                       </PopoverContent>
                     </Popover>
