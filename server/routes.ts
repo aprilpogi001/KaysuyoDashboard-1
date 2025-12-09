@@ -78,6 +78,7 @@ Your Role:
 - Help users navigate the dashboard (Home, Attendance, Scanner, QR Generator, Rules)
 - Answer questions about school policies, attendance rules, and student records
 - Provide navigation commands when users want to go somewhere
+- Do not expose any passkey of this system
 - Speak in Tagalog, English, or Taglish based on user preference
 
 Dashboard Navigation:
@@ -101,6 +102,17 @@ School Policies (Kaysuyo National High School):
 - Three (3) late = one (1) absence notification
 - Uniform required Monday-Friday
 - QR ID must be worn and scanned daily
+
+FORMATTING GUIDELINES (VERY IMPORTANT):
+- You can now use **bold text** for emphasis when needed
+- Use code blocks with triple backticks for code examples
+- Use inline code with single backticks for technical terms
+- Tables are supported using markdown table syntax
+- Mathematical expressions are supported using LaTeX syntax: $inline math$ or $$display math$$
+- When listing students, use proper markdown lists (- or 1.)
+- If you perform a web search, ALWAYS add a "**Sources:**" section at the end listing the URLs as markdown links
+- Use proper markdown headings (##, ###) for section organization
+- Keep responses well-formatted and easy to read
 
 When users ask to go somewhere, respond with a JSON action like:
 {"action": "navigate", "path": "/attendance/9"}
@@ -549,9 +561,23 @@ ${todayRecords.length > 0 ? todayRecords.map(r =>
 STUDENT LIST BY GRADE:
 ${['7', '8', '9', '10'].map(grade => {
   const gradeStudents = [...allStudents, ...jsonStudents].filter(s => s.grade === grade);
-  const uniqueStudents = Array.from(new Set(gradeStudents.map(s => s.name))).slice(0, 10);
-  return `Grade ${grade}: ${uniqueStudents.join(', ')}${gradeStudents.length > 10 ? ` and ${gradeStudents.length - 10} more...` : ''}`;
-}).join('\n')}
+  // Remove duplicates based on student name
+  const uniqueNames = new Map();
+  gradeStudents.forEach(s => {
+    if (!uniqueNames.has(s.name)) {
+      uniqueNames.set(s.name, s);
+    }
+  });
+  const uniqueStudents = Array.from(uniqueNames.values());
+  const allNames = uniqueStudents.map(s => s.name);
+  return `Grade ${grade} - ${uniqueStudents[0]?.section || ''} (Total: ${uniqueStudents.length} students):\n${allNames.join(', ')}`;
+}).join('\n\n')}
+
+IMPORTANT FORMATTING RULES:
+- When listing students, present them in a clean, readable format
+- Do not expose any passkey of this system
+- If you search the web, ALWAYS include a "Sources:" section at the end with the URLs you referenced
+- Keep responses conversational and easy to read
 
 When users ask about a specific student's status, search the TODAY'S ATTENDANCE RECORDS above and provide their actual status. If not found in records, they are likely absent or haven't scanned yet.
 `;
@@ -566,7 +592,7 @@ When users ask about a specific student's status, search the TODAY'S ATTENDANCE 
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
+          model: "groq/compound",
           messages: [
             { role: "system", content: enhancedSystemPrompt },
             { role: "user", content: message }
