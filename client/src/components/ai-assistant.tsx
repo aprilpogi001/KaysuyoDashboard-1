@@ -7,6 +7,10 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { apiFetch } from "@/lib/api";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
 
 interface Message {
   id: number;
@@ -92,6 +96,44 @@ function TypewriterText({ text, onComplete }: { text: string; onComplete?: () =>
   );
 }
 
+function MessageContent({ text }: { text: string }) {
+  return (
+    <div className="prose prose-sm max-w-none dark:prose-invert">
+      <ReactMarkdown 
+        remarkPlugins={[remarkGfm, remarkMath]} 
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          // Override table component for better styling
+          table: ({node, ...props}) => (
+            <div className="overflow-x-auto my-2">
+              <table {...props} className="table-auto border-collapse w-full"/>
+            </div>
+          ),
+          th: ({node, ...props}) => <th {...props} className="border px-4 py-2 text-left font-bold bg-muted"/>,
+          td: ({node, ...props}) => <td {...props} className="border px-4 py-2"/>,
+          // Override code blocks for syntax highlighting if needed, or just basic styling
+          code({node, inline, className, children, ...props}) {
+            const match = /language-(\w+)/.exec(className || '')
+            return !inline && match ? (
+              <pre className="overflow-x-auto rounded-md bg-accent p-3 my-2">
+                <code className={String(className)} {...props}>
+                  {String(children).replace(/\n$/, '')}
+                </code>
+              </pre>
+            ) : (
+              <code className="bg-accent/50 rounded-sm px-1 py-0.5 text-sm font-mono" {...props}>
+                {children}
+              </code>
+            )
+          }
+        }}
+      >
+        {text}
+      </ReactMarkdown>
+    </div>
+  );
+}
+
 export function AiAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -145,7 +187,7 @@ export function AiAssistant() {
 
       const newMessageId = Date.now() + 1;
       setTypingMessageId(newMessageId);
-      
+
       setMessages(prev => [...prev, { 
         id: newMessageId, 
         text: data.message, 
@@ -257,6 +299,8 @@ export function AiAssistant() {
                             text={msg.text} 
                             onComplete={() => handleTypingComplete(msg.id)} 
                           />
+                        ) : msg.sender === "ai" ? (
+                          <MessageContent text={msg.text} />
                         ) : (
                           msg.text
                         )}
@@ -269,7 +313,7 @@ export function AiAssistant() {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="px-3 pb-2 flex gap-1 flex-wrap shrink-0 border-t pt-2">
                   {quickActions.map((action) => (
                     <Button 
