@@ -1,75 +1,247 @@
 {
   "grade": "10",
   "section": "Hope",
+  "school_year": "2025-2026",
   "students": [
     {
-      "name": "Aure, Ryan James",
+      "name": "Aure, Ryan James Garcia",
       "gender": "male",
-      "lrn": "Na",
+      "lrn": "107851150002",
       "contact": "NA",
       "email": ""
     },
     {
-      "name": "Julian, Arvie",
+      {
+      "name": "Badlis, Jian Jhorele Nolasco",
+      "gender": "male",
+      "lrn": "107851150036",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Blaya, Jerald Manalo",
+      "gender": "male",
+      "lrn": "107505150002",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Bugagao, Ronnie Manalo",
+      "gender": "male",
+      "lrn": "107851150005",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Cariño, Sherwin Delos Angeles",
+      "gender": "male",
+      "lrn": "107851150009",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Cañezares, Felix Je. Alipustain",
+      "gender": "male",
+      "lrn": "107851150008",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Delos Angeles, Aivan",
+      "gender": "male",
+      "lrn": "",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Dulce, Andrei Torres",
+      "gender": "male",
+      "lrn": "107851150010",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Julian, Arvie Glorioso",
       "gender": "male",
       "lrn": "108035150040",
       "contact": "09106445271",
       "email": ""
     },
     {
-      "name": "Pillerva, James G.",
+      "name": "Julian, Christian Jay Glorioso",
       "gender": "male",
-      "lrn": "107851150016",
-      "contact": "09526415570",
-      "email": ""
-    },
-    {
-      "name": "Julian, Christian Jay G.",
-      "gender": "male",
-      "lrn": "1080351400",
+      "lrn": "108035140026",
       "contact": "09817551311",
       "email": ""
     },
     {
-      "name": "Manalo, April M.",
+      "name": "Macasilang, Zaie-Mmuel",
+      "gender": "male",
+      "lrn": "107961150054",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Manalo, April Macasinag",
       "gender": "male",
       "lrn": "107851140013",
       "contact": "09168742028",
       "email": "manaloapril88@gmail.com"
     },
     {
-      "name": "Bautista, Yesha Nicole G.",
+      "name": "Mendoza, Edrian Parba",
+      "gender": "male",
+      "lrn": "108036130063",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Olitoquit, Miguel Joseph Noveno",
+      "gender": "male",
+      "lrn": "107851150047",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Paller, Jhon Cris Tandoc",
+      "gender": "male",
+      "lrn": "108035150023",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Palma, Aaron Pillerva",
+      "gender": "male",
+      "lrn": "424118150053",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Pillerva, James Gatdula",
+      "gender": "male",
+      "lrn": "107851150016",
+      "contact": "09526415570",
+      "email": ""
+    },
+    {
+      "name": "Quinto, Lance Pastrana",
+      "gender": "male",
+      "lrn": "107851140020",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Ramos, Kyle Aaron Gaylon",
+      "gender": "male",
+      "lrn": "107851150012",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Rosano, Vince Patrick Gatchalian",
+      "gender": "male",
+      "lrn": "107851150014",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Vidalon, EJ Badlis",
+      "gender": "male",
+      "lrn": "107851150015",
+      "contact": "",
+      "email": ""
+    },
+
+    // ==================== FEMALE ====================
+    {
+      "name": "Agrimano, Merry Joy Arinton",
+      "gender": "female",
+      "lrn": "108036130074",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Bautista, Yesha Nicole Gutay",
       "gender": "female",
       "lrn": "107851150017",
       "contact": "09652608367",
       "email": ""
     },
     {
-      "name": "Caballes, Angiella Sofia",
+      "name": "Caballes, Angiella Soia Torres",
       "gender": "female",
       "lrn": "107851150018",
       "contact": "09534376462",
       "email": ""
     },
     {
-      "name": "Escorido, Jomalyn G.",
+      "name": "Escorido, Jomalyn Golfo",
       "gender": "female",
       "lrn": "107851150020",
       "contact": "09941397751",
       "email": ""
     },
     {
-      "name": "Salazar, Kyla N.",
+      "name": "Rogador, Ashley Nicole Maala",
+      "gender": "female",
+      "lrn": "107851150026",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Salazar, Kyla Nepomuceno",
       "gender": "female",
       "lrn": "108035160044",
       "contact": "09650552352",
       "email": ""
     },
     {
-      "name": "Salazar, Zyren C.",
+      "name": "Salazar, Mary Jane Nepomuceno",
+      "gender": "female",
+      "lrn": "108035160043",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Salazar, Zyren Carampot",
       "gender": "female",
       "lrn": "107851150043",
       "contact": "09513559181",
+      "email": ""
+    },
+    {
+      "name": "Salvador, Yhurie Aglosolos",
+      "gender": "female",
+      "lrn": "107851150041",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Tagudtod, Rhyne Jhoie Bautista",
+      "gender": "female",
+      "lrn": "107851150030",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Tanuyan, Abegail Ramos",
+      "gender": "female",
+      "lrn": "108035150044",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Tañada, Angel Claudette Tongcua",
+      "gender": "female",
+      "lrn": "136476150560",
+      "contact": "",
+      "email": ""
+    },
+    {
+      "name": "Yanela, Chezka Aventurado",
+      "gender": "female",
+      "lrn": "107851150033",
+      "contact": "",
       "email": ""
     }
   ]
