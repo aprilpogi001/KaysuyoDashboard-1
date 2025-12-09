@@ -2,8 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageSquare, X, Send, Sparkles, Loader2, Maximize2, Minimize2 } from "lucide-react";
+import { MessageSquare, X, Send, Sparkles, Maximize2, Minimize2, Globe, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "wouter";
@@ -13,6 +12,84 @@ interface Message {
   id: number;
   text: string;
   sender: "user" | "ai";
+  isTyping?: boolean;
+}
+
+function ThinkingAnimation() {
+  return (
+    <div className="flex items-center gap-2 text-muted-foreground text-sm py-2">
+      <div className="flex items-center gap-1">
+        <motion.div
+          className="w-2 h-2 bg-primary rounded-full"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 0.8, repeat: Infinity, delay: 0 }}
+        />
+        <motion.div
+          className="w-2 h-2 bg-primary rounded-full"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 0.8, repeat: Infinity, delay: 0.2 }}
+        />
+        <motion.div
+          className="w-2 h-2 bg-primary rounded-full"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 0.8, repeat: Infinity, delay: 0.4 }}
+        />
+      </div>
+      <span className="text-xs">Nag-iisip...</span>
+    </div>
+  );
+}
+
+function SearchingAnimation() {
+  return (
+    <motion.div 
+      className="flex items-center gap-2 text-muted-foreground text-sm py-2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      >
+        <Globe className="w-4 h-4 text-primary" />
+      </motion.div>
+      <span className="text-xs">Searching in web..</span>
+    </motion.div>
+  );
+}
+
+function TypewriterText({ text, onComplete }: { text: string; onComplete?: () => void }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        const charsToAdd = Math.min(3, text.length - currentIndex);
+        setDisplayedText(prev => prev + text.slice(currentIndex, currentIndex + charsToAdd));
+        setCurrentIndex(prev => prev + charsToAdd);
+      }, 15);
+      return () => clearTimeout(timeout);
+    } else if (onComplete) {
+      onComplete();
+    }
+  }, [currentIndex, text, onComplete]);
+
+  return (
+    <motion.span
+      initial={{ opacity: 0.8 }}
+      animate={{ opacity: 1 }}
+    >
+      {displayedText}
+      {currentIndex < text.length && (
+        <motion.span
+          className="inline-block w-0.5 h-4 bg-primary ml-0.5"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+        />
+      )}
+    </motion.span>
+  );
 }
 
 export function AiAssistant() {
@@ -23,14 +100,20 @@ export function AiAssistant() {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [typingMessageId, setTypingMessageId] = useState<number | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [, setLocation] = useLocation();
 
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  const scrollToBottom = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
     }
-  }, [messages]);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -39,6 +122,13 @@ export function AiAssistant() {
     setMessages(prev => [...prev, userMsg]);
     setInput("");
     setIsLoading(true);
+
+    const messageContainsSearch = input.toLowerCase().includes("search") || 
+                                   input.toLowerCase().includes("hanapin") ||
+                                   input.toLowerCase().includes("look up");
+    if (messageContainsSearch) {
+      setIsSearching(true);
+    }
 
     try {
       const response = await apiFetch("/api/ai/chat", {
@@ -53,10 +143,14 @@ export function AiAssistant() {
         throw new Error(data.error || "Failed to get response");
       }
 
+      const newMessageId = Date.now() + 1;
+      setTypingMessageId(newMessageId);
+      
       setMessages(prev => [...prev, { 
-        id: Date.now() + 1, 
+        id: newMessageId, 
         text: data.message, 
-        sender: "ai" 
+        sender: "ai",
+        isTyping: true
       }]);
 
       if (data.navigation) {
@@ -78,7 +172,15 @@ export function AiAssistant() {
       }]);
     } finally {
       setIsLoading(false);
+      setIsSearching(false);
     }
+  };
+
+  const handleTypingComplete = (messageId: number) => {
+    setMessages(prev => prev.map(msg => 
+      msg.id === messageId ? { ...msg, isTyping: false } : msg
+    ));
+    setTypingMessageId(null);
   };
 
   const quickActions = [
@@ -102,7 +204,7 @@ export function AiAssistant() {
                 : "bottom-20 right-4 md:right-6 w-[calc(100vw-2rem)] md:w-[420px] max-w-[420px]"
             )}
           >
-            <Card className="border-primary/20 shadow-xl h-full flex flex-col">
+            <Card className="border-primary/20 shadow-xl h-full flex flex-col overflow-hidden">
               <CardHeader className="bg-primary text-primary-foreground rounded-t-lg p-3 md:p-4 flex flex-row items-center justify-between shrink-0">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
@@ -123,33 +225,52 @@ export function AiAssistant() {
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
-                <ScrollArea className={cn("p-3 md:p-4 flex-1", isExpanded ? "h-full" : "h-[300px] md:h-[350px]")} ref={scrollRef}>
+              <CardContent className="p-0 flex-1 flex flex-col overflow-hidden min-h-0">
+                <div 
+                  ref={scrollContainerRef}
+                  className={cn(
+                    "flex-1 overflow-y-auto overflow-x-hidden p-3 md:p-4",
+                    isExpanded ? "max-h-full" : "max-h-[300px] md:max-h-[350px]"
+                  )}
+                  style={{ 
+                    overscrollBehavior: 'contain',
+                    WebkitOverflowScrolling: 'touch'
+                  }}
+                >
                   <div className="space-y-3">
                     {messages.map((msg) => (
-                      <div
+                      <motion.div
                         key={msg.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
                         className={cn(
-                          "flex flex-col gap-2 rounded-lg px-3 py-2 text-sm break-words",
+                          "flex flex-col gap-2 rounded-lg px-3 py-2 text-sm",
                           msg.sender === "user"
                             ? "ml-auto bg-primary text-primary-foreground max-w-[85%]"
                             : "bg-muted max-w-[90%]"
                         )}
                         style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
                       >
-                        {msg.text}
-                      </div>
+                        {msg.sender === "ai" && msg.isTyping && typingMessageId === msg.id ? (
+                          <TypewriterText 
+                            text={msg.text} 
+                            onComplete={() => handleTypingComplete(msg.id)} 
+                          />
+                        ) : (
+                          msg.text
+                        )}
+                      </motion.div>
                     ))}
                     {isLoading && (
-                      <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Nag-iisip...</span>
+                      <div className="bg-muted max-w-[90%] rounded-lg px-3 py-2">
+                        {isSearching ? <SearchingAnimation /> : <ThinkingAnimation />}
                       </div>
                     )}
                   </div>
-                </ScrollArea>
+                </div>
                 
-                <div className="px-3 pb-2 flex gap-1 flex-wrap shrink-0">
+                <div className="px-3 pb-2 flex gap-1 flex-wrap shrink-0 border-t pt-2">
                   {quickActions.map((action) => (
                     <Button 
                       key={action.label} 
