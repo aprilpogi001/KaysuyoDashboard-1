@@ -6,12 +6,18 @@ const EMAIL_FROM = process.env.EMAIL_FROM || 'KNHS Guidance <noreply@knhs.edu.ph
 
 let transporter: nodemailer.Transporter | null = null;
 
+console.log(`[Email Config] EMAIL_USER: ${EMAIL_USER ? EMAIL_USER.substring(0, 5) + '***' : 'NOT SET'}`);
+console.log(`[Email Config] EMAIL_PASSWORD: ${EMAIL_PASSWORD ? '***configured***' : 'NOT SET'}`);
+console.log(`[Email Config] EMAIL_FROM: ${EMAIL_FROM}`);
+
 function getTransporter(): nodemailer.Transporter | null {
   if (!EMAIL_USER || !EMAIL_PASSWORD) {
+    console.log("[Email] Email credentials not configured");
     return null;
   }
 
   if (!transporter) {
+    console.log("[Email] Creating Gmail transporter...");
     transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -19,6 +25,7 @@ function getTransporter(): nodemailer.Transporter | null {
         pass: EMAIL_PASSWORD,
       },
     });
+    console.log("[Email] Gmail transporter created successfully");
   }
 
   return transporter;
