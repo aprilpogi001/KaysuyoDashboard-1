@@ -202,14 +202,14 @@ export function StudentTable({ students, isLoading }: StudentTableProps) {
     window.print();
   };
 
-  const renderStudentRow = (student: Student, index: number) => (
+  const renderStudentRow = (student: Student, displayNumber: number) => (
     <TableRow 
       key={student.id} 
       className="hover:bg-muted/30 cursor-pointer" 
       onClick={() => setSelectedStudent(student)}
       data-testid={`row-student-${student.id}`}
     >
-      <TableCell className="text-xs text-muted-foreground">{index + 1}</TableCell>
+      <TableCell className="text-xs text-muted-foreground">{displayNumber}</TableCell>
       <TableCell className="font-medium">{student.name}</TableCell>
       <TableCell className="font-mono text-xs">{student.lrn || "—"}</TableCell>
       <TableCell>{student.section}</TableCell>
@@ -224,7 +224,7 @@ export function StudentTable({ students, isLoading }: StudentTableProps) {
     </TableRow>
   );
 
-  const renderStudentCard = (student: Student, index: number) => (
+  const renderStudentCard = (student: Student, displayNumber: number) => (
     <Card 
       key={student.id} 
       className="p-3 cursor-pointer hover:bg-muted/50 transition-colors" 
@@ -234,7 +234,7 @@ export function StudentTable({ students, isLoading }: StudentTableProps) {
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{index + 1}</span>
+            <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{displayNumber}</span>
             <h3 className="font-medium text-sm truncate">{student.name}</h3>
           </div>
           <p className="text-xs text-muted-foreground mt-1">{student.section}</p>
